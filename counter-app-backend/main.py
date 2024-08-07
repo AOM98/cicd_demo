@@ -17,7 +17,7 @@ app = FastAPI()
 
 # Configure CORS
 origins = [
-    "http://localhost:3003",  # Allow your Angular app to access the API
+    "http://localhost:4200",  # Allow your Angular app to access the API
 ]
 
 app.add_middleware(
