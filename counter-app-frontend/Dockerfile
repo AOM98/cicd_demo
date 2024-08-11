@@ -16,8 +16,8 @@ COPY . .
 # Build the Angular application
 RUN npm run build --prod
 
-# Stage 2: Serve the application using Nginx
-FROM nginx:stable-alpine
+# Stage 2: Serve the application using nginx-unprivileged
+FROM nginxinc/nginx-unprivileged:stable-alpine
 
 # Copy the built Angular files from Stage 1
 COPY --from=build /app/dist/counter-app-frontend /usr/share/nginx/html
@@ -25,8 +25,8 @@ COPY --from=build /app/dist/counter-app-frontend /usr/share/nginx/html
 # Copy custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080 (default port for unprivileged Nginx)
+EXPOSE 8080
 
 # Start Nginx server
 CMD ["nginx", "-g", "daemon off;"]

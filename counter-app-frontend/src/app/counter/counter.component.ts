@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http'; // Import HttpClient
 })
 export class CounterComponent {
   counterValue: number = 0;
-  apiUrl: string = 'http://localhost:8000';
+  apiUrl: string = 'http://counter-app-backend-cicd-demo.apps-crc.testing';
 
   constructor(private http: HttpClient) {
     this.getCounterValue();

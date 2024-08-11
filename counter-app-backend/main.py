@@ -18,6 +18,8 @@ app = FastAPI()
 # Configure CORS
 origins = [
     "http://localhost:4200",  # Allow your Angular app to access the API
+    "http://counter-app-backend-cicd-demo.apps-crc.testing",
+    "http://counter-frontend-cicd-demo.apps-crc.testing",
 ]
 
 app.add_middleware(
