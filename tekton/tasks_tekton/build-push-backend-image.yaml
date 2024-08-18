@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: build-push-backend-image
+spec:
+  params:
+    - name: IMAGE
+      description: Name (reference) of the image to build
+  workspaces:
+    - name: source
+  steps:
+    - name: build-and-push
+      image: quay.io/buildah/stable:v1.23.1
+      env:
+        - name: REGISTRY_AUTH_FILE
+          value: /tekton/home/.docker/config.json
+      workingDir: $(workspaces.source.path)/counter-app-backend
+      securityContext:
+        privileged: true
+      script: |
+        buildah bud --tls-verify=false --layers -f Dockerfile -t $(params.IMAGE) .
+        buildah push --tls-verify=false $(params.IMAGE)

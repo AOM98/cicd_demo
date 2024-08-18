@@ -1,0 +1,16 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: test-backend
+spec:
+  workspaces:
+    - name: source
+  steps:
+    - name: test
+      image: python:3.12-slim
+      workingDir: $(workspaces.source.path)/counter-app-backend
+      script: |
+        pip install --no-cache-dir -r requirements.txt
+        pip install pytest httpx pytest-asyncio
+        pytest test_main.py
+        echo "Backend tests completed"

@@ -20,13 +20,13 @@
 - [x] Define Services and Routes in YAML files
 
 ## 5. Manual Deployment to OpenShift
-- [ ] Apply backend deployment configuration: `oc apply -f backend-deployment.yaml`
-- [ ] Apply frontend deployment configuration: `oc apply -f frontend-deployment.yaml`
-- [ ] Verify deployments: `oc get pods`, `oc get services`, `oc get routes`
-- [ ] Test functionality of deployed applications
+- [x] Apply backend deployment configuration: `oc apply -f backend-deployment.yaml`
+- [x] Apply frontend deployment configuration: `oc apply -f frontend-deployment.yaml`
+- [x] Verify deployments: `oc get pods`, `oc get services`, `oc get routes`
+- [x] Test functionality of deployed applications
 
 ## 6. Set Up Tekton (CI)
-- [ ] Install Tekton Pipelines on OpenShift cluster
+- [x] Install Tekton Pipelines on OpenShift cluster
 - [ ] Install Tekton Triggers on OpenShift cluster
 - [ ] Create Tekton Tasks YAML files:
   - [ ] Git clone task
@@ -65,3 +65,7 @@
 - [ ] Update deployment configurations to use specific image versions
 - [ ] Test rollback procedures
 - [ ] Document the CI/CD process for team reference
+
+ I went ahead and created the deployment yaml files for frontend and backend and defined services and routes, and also deployed to openshift and tested the functionality of the application and it is working great.
+
+Now I would like to setup the tekton CI, I went ahead and installed tekton pipelines on openshft cluster (openshift pipelines), can you guide me through creating tekton CI and implementing it with my code base?

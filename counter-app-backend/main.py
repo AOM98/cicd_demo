@@ -20,6 +20,7 @@ origins = [
     "http://localhost:4200",  # Allow your Angular app to access the API
     "http://counter-app-backend-cicd-demo.apps-crc.testing",
     "http://counter-frontend-cicd-demo.apps-crc.testing",
+    "*",  # Allow all origins
 ]
 
 app.add_middleware(
@@ -61,3 +62,10 @@ async def reset_counter():
     """Reset the counter to 0."""
     counter.value = 0
     return CounterResponse(value=counter.value)
+
+
+# @app.post("/counter/double", response_model=CounterResponse)
+# async def double_counter():
+#     """Double the value of the counter."""
+#     counter.value *= 2
+#     return CounterResponse(value=counter.value)

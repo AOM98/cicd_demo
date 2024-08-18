@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: backend-pipeline-run-001
+spec:
+  serviceAccountName: my-service-account
+  pipelineRef:
+    name: backend-pipeline
+  params:
+    - name: git-url
+      value: "https://github.com/AOM98/cicd_demo.git"
+    - name: git-revision
+      value: "main"
+    - name: image-name
+      value: "docker.io/abdullahom/counter-app-be:ci-001"
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
