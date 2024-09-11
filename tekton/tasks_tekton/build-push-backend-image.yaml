@@ -6,6 +6,9 @@ spec:
   params:
     - name: IMAGE
       description: Name (reference) of the image to build
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build
+      default: ./Dockerfile
   workspaces:
     - name: source
   steps:
@@ -15,8 +18,8 @@ spec:
         - name: REGISTRY_AUTH_FILE
           value: /tekton/home/.docker/config.json
       workingDir: $(workspaces.source.path)/counter-app-backend
-      securityContext:
-        privileged: true
+      # securityContext:
+      #   privileged: true
       script: |
-        buildah bud --tls-verify=false --layers -f Dockerfile -t $(params.IMAGE) .
-        buildah push --tls-verify=false $(params.IMAGE)
+        buildah --storage-driver=vfs bud --format=docker --tls-verify=false --no-cache -f $(params.DOCKERFILE) -t $(params.IMAGE) .
+        buildah --storage-driver=vfs push --tls-verify=false $(params.IMAGE)

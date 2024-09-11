@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: backend-pipeline-run-001
+  name: backend-pipeline-run-003
 spec:
   serviceAccountName: my-service-account
   pipelineRef:
@@ -11,8 +11,8 @@ spec:
       value: "https://github.com/AOM98/cicd_demo.git"
     - name: git-revision
       value: "main"
-    - name: image-name
-      value: "docker.io/abdullahom/counter-app-be:ci-001"
+    - name: IMAGE
+      value: "docker.io/abdullahom/counter-app-be:ci-002"
   workspaces:
     - name: shared-workspace
       volumeClaimTemplate:

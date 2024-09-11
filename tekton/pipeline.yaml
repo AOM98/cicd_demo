@@ -11,8 +11,11 @@ spec:
     - name: git-revision
       type: string
       default: main
-    - name: image-name
+    - name: IMAGE
       type: string
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build
+      default: ./Dockerfile
   tasks:
     - name: fetch-repository
       taskRef:
@@ -32,13 +35,30 @@ spec:
       workspaces:
         - name: source
           workspace: shared-workspace
-    - name: build-push-backend-image
+    - name: build-and-push
       runAfter: ["test-backend"]
       taskRef:
-        name: build-push-backend-image
+        name: buildah  # Reference to the predefined buildah task in the cluster
+        kind: ClusterTask 
       params:
         - name: IMAGE
-          value: $(params.image-name)
+          value: $(params.IMAGE)
+        - name: DOCKERFILE
+          value: $(params.DOCKERFILE)
+        - name: CONTEXT
+          value: $(workspaces.source.path)/counter-app-backend  # Setting the context to the correct directory
+        - name: TLSVERIFY
+          value: "false"  # Disabling TLS verification if required
       workspaces:
         - name: source
           workspace: shared-workspace
+    # - name: build-push-backend-image
+    #   runAfter: ["test-backend"]
+    #   taskRef:
+    #     name: build-push-backend-image
+    #   params:
+    #     - name: IMAGE
+    #       value: $(params.image-name)
+    #   workspaces:
+    #     - name: source
+    #       workspace: shared-workspace

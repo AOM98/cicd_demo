@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http'; // Import HttpClient
 })
 export class CounterComponent {
   counterValue: number = 0;
-  apiUrl: string = 'http://counter-app-backend-cicd-demo.apps-crc.testing';
+  apiUrl: string = 'http://localhost:8000';
 
   constructor(private http: HttpClient) {
     this.getCounterValue();
@@ -34,6 +34,14 @@ export class CounterComponent {
   decrement(): void {
     this.http
       .post<{ value: number }>(`${this.apiUrl}/counter/decrement`, {})
+      .subscribe((response) => {
+        this.counterValue = response.value;
+      });
+  }
+
+  double(): void {
+    this.http
+      .post<{ value: number }>(`${this.apiUrl}/counter/double`, {})
       .subscribe((response) => {
         this.counterValue = response.value;
       });

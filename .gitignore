@@ -37,3 +37,5 @@ yarn.lock
 
 # Ignore macOS specific files
 .DS_Store
+
+deployment/custom-buildah-scc.yaml

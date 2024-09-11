@@ -64,8 +64,8 @@ async def reset_counter():
     return CounterResponse(value=counter.value)
 
 
-# @app.post("/counter/double", response_model=CounterResponse)
-# async def double_counter():
-#     """Double the value of the counter."""
-#     counter.value *= 2
-#     return CounterResponse(value=counter.value)
+@app.post("/counter/double", response_model=CounterResponse)
+async def double_counter():
+    """Double the value of the counter."""
+    counter.value *= 2
+    return CounterResponse(value=counter.value)

@@ -22,6 +22,10 @@ spec:
         git config --global --add safe.directory '$(workspaces.source.path)'
         git clone $(params.url) $(workspaces.source.path)
         cd $(workspaces.source.path)
+        echo "current working dir"
+        pwd
+        echo "file list"
+        ls -lart
         if [ "$(params.revision)" != "" ]; then
           git checkout $(params.revision)
         fi
